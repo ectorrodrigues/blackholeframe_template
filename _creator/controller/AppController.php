@@ -1,5 +1,8 @@
 <?php
 
+	$sitename = explode('/', $_SERVER['PHP_SELF']);
+	$sitename = $sitename[1];
+
 	if(isset($_POST['table'])){ 			$table 			= $_POST['table']; }
 	if(isset($_POST['title'])){ 			$title 			= $_POST['title']; }
 	if(isset($_POST['db_num_columns'])){ 	$db_num_columns	= $_POST['db_num_columns']; }
@@ -48,30 +51,32 @@
 			    $pdo->exec($sql);
 			    echo "DATABASE sucessfully created.<br />";
 
-		    $sql = "CREATE TABLE cms ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, titulo VARCHAR(50) )";
+		    $sql = "CREATE TABLE cms ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50) )";
 		    $pdo->exec($sql);
 		    echo "CMS Table sucessfully created.<br />";
 
-		    $sql = "CREATE TABLE usuarios ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, titulo VARCHAR(50), email VARCHAR(80), password VARCHAR(150), keypass VARCHAR(150) )";
+		    $sql = "CREATE TABLE update_time_control ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, time DATETIME() )";
 		    $pdo->exec($sql);
-		    echo "Usuarios Table sucessfully created.<br />";
+		    echo "Update Time Control Table sucessfully created.<br />";
+
+		    $sql = "CREATE TABLE users ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), email VARCHAR(80), password VARCHAR(150), keypass VARCHAR(150) )";
+		    $pdo->exec($sql);
+		    echo "users Table sucessfully created.<br />";
 
 		    $user 		= $_POST['user'];
 		    $email 		= $_POST['email'];
 		    $password 	= $_POST['password'];
 		    $password 	= crypt($password, '$1$H2Oc3po$');
 
-		    $query 	= $pdo->prepare("INSERT INTO usuarios (id, titulo, email, password, keypass) VALUES('1', :titulo, :email, :password, :keypass)"); 
-			$query->bindParam(':titulo', $user);
+		    $query 	= $pdo->prepare("INSERT INTO users (id, title, email, password, keypass) VALUES('1', :title, :email, :password, :keypass)"); 
+			$query->bindParam(':title', $user);
 			$query->bindParam(':email',$email);
 			$query->bindParam(':password', $password);
 			$query->bindParam(':keypass', $password);
 			$query->execute();
-			echo "Usuarios Table Updated.<br />";
+			echo "users Table Updated.<br />";
 
-			echo '<p><a href="/hco/creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
-
-
+			echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
 
 
 			} catch(PDOException $e){
@@ -142,7 +147,7 @@
 		$last_id = $query->fetchColumn();
 		$last_id = ($last_id+1);
 
-	    $query 	= $conn->prepare("INSERT INTO cms (id, titulo) VALUES(:last_id, :title)"); 
+	    $query 	= $conn->prepare("INSERT INTO cms (id, title) VALUES(:last_id, :title)"); 
 		$query->bindParam(':title', $title);
 		$query->bindParam(':last_id', $last_id);
 		$query->execute();
@@ -222,7 +227,7 @@ function fechar() {
 }
 </script>
 
-<link rel="stylesheet" type="text/css" href="<?=CSS_DIR?>galeria.css" /> 
+<link rel="stylesheet" type="text/css" href="<?=CSS_DIR?>gallery.css" /> 
 
 <?php  $path = "'.ROOT.'/app/webroot/img/'.$title.'/"; ?>
 
@@ -235,7 +240,7 @@ function fechar() {
 		echo "
 			<input type="button" id="thumb" 
 			value=\"".$img."\"
-			alt=\"<strong><font size=+2>".$titulo."</font></strong>\" name=\"firstthumb\" 
+			alt=\"<strong><font size=+2>".$title."</font></strong>\" name=\"firstthumb\" 
 			onclick=\"selectImg(this.value)\" 
 			onfocus=\"selectImg2(this.alt)\" 
 			style=\"	background-image:url(".$path.$img."); 
@@ -244,15 +249,15 @@ function fechar() {
 					margin-left:0\"
 		/>";
 	
-		foreach($conn->query("SELECT * FROM '.$title.'_galeria WHERE id_'.$title.' =\'".$id."\'") as $row_gal) {
+		foreach($conn->query("SELECT * FROM '.$title.'_gallery WHERE id_'.$title.' =\'".$id."\'") as $row_gal) {
 									
-			$titulo_gal	= $row_gal["titulo"];
+			$title_gal	= $row_gal["title"];
 			$img_gal	= $row_gal["img"];			
 		
 			echo "
 			<input type=\"button\" id=\"thumb\" 
 			value=\"".$img_gal."\"
-			alt=\"<strong><font size=+2>".$titulo_gal."</font></strong>\" name=\"firstthumb\" 
+			alt=\"<strong><font size=+2>".$title_gal."</font></strong>\" name=\"firstthumb\" 
 			onclick=\"selectImg(this.value)\" 
 			onfocus=\"selectImg2(this.alt)\" 
 			style=\"	background-image:url(".$path.$img_gal."); 
@@ -270,7 +275,7 @@ function fechar() {
 
 		require('../config/database.php');
 
-	    $sql = "CREATE TABLE ".$title."_galeria ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,  id_".$title." INT(6), titulo VARCHAR(100), img VARCHAR(300) )";
+	    $sql = "CREATE TABLE ".$title."_gallery ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,  id_".$title." INT(6), title VARCHAR(100), img VARCHAR(300) )";
 	    $conn->exec($sql);
 
 
@@ -280,7 +285,7 @@ function fechar() {
 	}
 
 
-	echo '<p><a href="/ctesop/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
+	echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
 
 
 	$conn = null;

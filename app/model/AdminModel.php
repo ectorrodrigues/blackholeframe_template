@@ -4,7 +4,8 @@
 
 	include ('../config/directories.php');
 	include ('../config/database.php');
-	$array_galeries 		= array('produtos', 'noticias');
+
+	$array_galeries = array('produtos', 'noticias'); // Here we tell the pages that will have some gallery within
 
 	$action	= $_GET['action'];
 	$table	= $_GET['id'];
@@ -12,8 +13,8 @@
 
 	$conn = db();
 
-	foreach($conn->query("SELECT titulo FROM cms WHERE id = '".$table."' ") as $row) {
-		$table		= $row['titulo'];
+	foreach($conn->query("SELECT title FROM cms WHERE id = '".$table."' ") as $row) {
+		$table		= $row['title'];
 	}
 
 
@@ -45,8 +46,8 @@
 				$file		= $_FILES[$field]['name'];
 				$img		= uniqid().$file;
 
-				$_UP['pasta']	= ABSOLUTE_PATH . $table . DS;
-				move_uploaded_file($_FILES[$field]['tmp_name'], $_UP['pasta'] . $img);
+				$_UP['folder']	= ABSOLUTE_PATH . $table . DS;
+				move_uploaded_file($_FILES[$field]['tmp_name'], $_UP['folder'] . $img);
 
 			} 
 			
@@ -66,7 +67,7 @@
 		}
 
 
-		$query 	= $conn->prepare("SELECT id FROM cms WHERE titulo = '".$table."'"); 
+		$query 	= $conn->prepare("SELECT id FROM cms WHERE title = '".$table."'"); 
 		$query->execute();
 		$id_category = $query->fetchColumn();
 
@@ -92,7 +93,7 @@
 			
 					move_uploaded_file($_FILES['filesToUpload']['tmp_name'][$i], ABSOLUTE_PATH . $table . DS . $fileimgname);
 
-					$query 	= $conn->prepare("INSERT INTO ".$table."_galeria (id_".$table.", titulo, img) VALUES ('".$id_last."', '".$fileimgname."', '".$fileimgname."')"); 
+					$query 	= $conn->prepare("INSERT INTO ".$table."_gallery (id_".$table.", title, img) VALUES ('".$id_last."', '".$fileimgname."', '".$fileimgname."')"); 
 					$query->execute();    
 			
 					$i++;	
@@ -141,8 +142,8 @@
 					$file		= $_FILES[$field]['name'];
 					$img		= uniqid().$file;
 
-					$_UP['pasta']	= IMG_REL_DIR . $table . DS;
-					move_uploaded_file($_FILES[$field]['tmp_name'], $_UP['pasta'] . $img);
+					$_UP['folder']	= IMG_REL_DIR . $table . DS;
+					move_uploaded_file($_FILES[$field]['tmp_name'], $_UP['folder'] . $img);
 
 					$columns_val	.= $field." = '".$img."', ";
 				}
@@ -161,7 +162,7 @@
 
 		}
 
-		$query 	= $conn->prepare("SELECT id FROM cms WHERE titulo = '".$table."'"); 
+		$query 	= $conn->prepare("SELECT id FROM cms WHERE title = '".$table."'"); 
 		$query->execute();
 		$id_category = $query->fetchColumn();
 
@@ -189,7 +190,7 @@
 
 					move_uploaded_file($_FILES['filesToUpload']['tmp_name'][$i], ABSOLUTE_PATH . $table . DS . $fileimgname);
 					
-					$query 	= $conn->prepare("INSERT INTO ".$table."_galeria (id_".$table.", titulo, img) VALUES ('".$id."', '".$fileimgname."', '".$fileimgname."')"); 
+					$query 	= $conn->prepare("INSERT INTO ".$table."_gallery (id_".$table.", title, img) VALUES ('".$id."', '".$fileimgname."', '".$fileimgname."')"); 
 					$query->execute();    
 
 					$i++;	
@@ -218,7 +219,7 @@
 
 	elseif($action == 'gallery'){
 
-		$query 	= $conn->prepare("DELETE FROM ".$table."_galeria WHERE id = ".$item.""); 
+		$query 	= $conn->prepare("DELETE FROM ".$table."_gallery WHERE id = ".$item.""); 
 		$query->execute();
 
 	}	

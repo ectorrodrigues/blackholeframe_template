@@ -153,7 +153,7 @@ include('app/model/AppModel.php');
 					$pass	= $_POST['password'];
 
 					$conn = db();
-					$query 	= $conn->prepare("SELECT keypass FROM usuarios WHERE email= :user AND password= :pass"); 
+					$query 	= $conn->prepare("SELECT keypass FROM users WHERE email= :user AND password= :pass"); 
 					$query->bindParam(':user', $user);
 					$query->bindParam(':pass', $pass);
 					$query->execute();
@@ -176,7 +176,7 @@ include('app/model/AppModel.php');
 				if(isset($_COOKIE['login'])){
 
 					$conn = db();
-					$query 	= $conn->prepare("SELECT email FROM usuarios WHERE keypass= :keypass"); 
+					$query 	= $conn->prepare("SELECT email FROM users WHERE keypass= :keypass"); 
 					$query->bindParam(':keypass', $_COOKIE['login']);
 					$query->execute();
 
