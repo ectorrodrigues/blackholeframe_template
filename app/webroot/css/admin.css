@@ -1,0 +1,281 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700,900');
+
+body{
+	width:100%;
+	margin:0;
+	padding:0;
+	top:0;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+	margin: 0;
+	padding: 0;
+	top:0;
+}
+
+.col1{ width: 8.3%; }
+.col2{ width: 16.6%; }
+.col3{ width: 24.9%; }
+.col4{ width: 33.2%; }
+.col5{ width: 41.5%; }
+.col6{ width: 49.8%; }
+.col7{ width: 58.1%; }
+.col8{ width: 66.4%; }
+.col9{ width: 74.7%; }
+.col10{ width: 83%; }
+.col11{ width: 91.3%; }
+.col12{ width: 100%; }
+
+.inline{
+	display: inline-block;
+}
+
+a{
+	text-decoration: none !important;
+}
+
+.margin-top-bottom-15{
+	margin:15px 0;
+}
+
+.top{
+	padding: 15px 0;
+	background-color: #000;
+}
+
+.middle-padding-top{
+	padding-top: 10%;
+}
+
+.login-screen{
+	padding: 50px 10px !important;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.menu{
+	background-color: #333;
+	height: 100%;
+	position: fixed;
+
+	height: auto;
+	padding-bottom: 30px;
+    overflow: hidden;
+}
+
+.menu-item{
+	padding: 10px 20px;
+	font-size: 13px !important;
+
+	color: #fff;
+	text-align: right;
+
+	border-bottom: dashed;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	border-bottom-color: #555;
+
+}
+
+.menu-item a{
+	color: #fff;
+	font-weight: 400 !important;
+}
+
+.content{
+	padding: 30px;
+}
+
+.margin-left{
+	margin-left: 25%;
+}
+
+.content-item{
+	width: 80%;
+	height: 90px;
+	padding: 10px;
+	margin-bottom:5px;
+	vertical-align: middle;
+
+	border: solid;
+	border-style:solid;
+	border-color: #ddd;
+	border-width: thin;
+}
+
+.content-item-thumb{
+	width: 90px;
+	height: 90px;
+	vertical-align: middle;
+	background-size: 100%;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+.content-item-title{
+	vertical-align: middle;
+	padding-left:30px;
+	font-size: 22px;
+}
+
+#welcome{
+	font-size: 40px;
+	margin-left: 30%;
+	margin-top:25%;
+	color: #666;
+}
+
+.bt_add{
+	width: auto;
+    height: auto;
+    display: inline-block;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #00cc00;
+    vertical-align: middle;
+    color: #fff;
+}
+
+.bt_edit{
+	background-color:#FCE901;
+	color:#333 !important;
+}
+
+.bt_delete{
+	background-color: #f00;
+	color:#fff !important;
+}
+
+.bt_edit, .bt_delete{
+	width: auto;
+	height: auto;
+	padding: 9px 10px;
+	border-radius: 19px;
+	vertical-align: middle;
+	font-size: 13px !important;
+}
+
+.bt_edit:hover, .bt_delete:hover{
+	-webkit-transform: rotate(-20deg); /* Safari */
+    transform: rotate(-20deg);
+}
+
+input, select, textarea{
+	display: block;
+	width: 80%;
+	padding: 10px;
+	margin: 5px 0;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color: #ccc;
+	font-size: 14px;
+}
+
+select{
+	width: 82%;
+}
+
+.submit{
+	background-color: #000;
+	color: #fff;
+	width: 82%;
+	padding: 15px;
+	border:none;
+	margin-top:40px;
+}
+
+.submit:hover{
+	background-color: #222;
+}
+
+#cke_texto{
+	width: 82% !important;
+}
+
+.transition{
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.logout{
+	float: right;
+	vertical-align: top;
+	margin: 10px 10px 0 0;
+}
+
+.logout a{
+	color: #000;
+	font-size: 10px;
+}
+
+.logout a:hover{
+	color: #f00;
+}
+
+label{
+	font-weight: 700;
+    margin: 20px 0 5px 0;
+    font-size: 16px;
+    display: block;
+}
+
+
+.menu-gallery{
+	position: absolute !important;
+	border-radius: 0 0 15px 0px
+
+	padding: 25px 0;
+	color: #fff;
+	display: inline-block;
+    text-align: right;
+    vertical-align: middle;
+
+    background-color: #333;
+
+	height: auto;
+    overflow: hidden;
+}
+
+.menu-gallery a:hover{
+	color: #FDB813 !important;
+	margin-right: 5px;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+input, select, textarea{
+	width: 80%;
+}
+
+select{
+	width: 82.5%;
+}
+
+.submit{
+	width: 82.5%;
+}
+
+.content-item{
+	width: 80%;
+	height: auto !important;
+	padding: 10px;
+	margin-bottom:5px;
+	vertical-align: middle;
+
+	border: solid;
+	border-style:solid;
+	border-color: #ddd;
+	border-width: thin;
+}
