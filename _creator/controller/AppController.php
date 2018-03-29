@@ -30,6 +30,18 @@
 	    file_put_contents($file, $text);
 	}
 
+	function create_files($dir, $filename){
+		$appmodel = file_get_contents('https://raw.githubusercontent.com/ectorrodrigues/blackholeframe/master/app/'.$dir.'/'.$filename);
+
+		if(strpos($appmodel, '<pre>') == true){
+			$appmodel = str_replace(array("<pre>", "</pre>"), array("<?php", "?>" ), $appmodel);
+		}
+
+		file_put_contents('../../app/'.$dir.'/'.$filename, $appmodel);
+
+		echo $filename;
+	}
+			
 
 	if(isset($_GET['initial'])){
 
@@ -77,9 +89,14 @@
 			echo "users Table Updated.<br />";
 
 
-			//MAKING FOLDERS
+			//MAKING FOLDERS AND POPULATE THEM WITH FILES
 			if (!file_exists('../../app')) { mkdir('../../app', 0777, true); }
 			if (!file_exists('../../app/config')) { mkdir('../../app/config', 0777, true); }
+			create_files('config', 'config.php');
+			create_files('config', 'database.php');
+			create_files('config', 'directories.php');
+
+			
 			if (!file_exists('../../app/controller')) { mkdir('../../app/controller', 0777, true); }
 			if (!file_exists('../../app/model')) { mkdir('../../app/model', 0777, true); }
 			if (!file_exists('../../app/vendors')) { mkdir('../../app/vendors', 0777, true); }
@@ -87,6 +104,12 @@
 			if (!file_exists('../../app/view')) { mkdir('../../app/view', 0777, true); }
 				if (!file_exists('../../app/view/elements')) { mkdir('../../app/view/elements', 0777, true); }
 					if (!file_exists('../../app/view/elements/site')) { mkdir('../../app/view/elements/site', 0777, true); }
+					create_files('elements/site', 'banners.php');
+					create_files('elements/site', 'footer.php');
+					create_files('elements/site', 'head.php');
+					create_files('elements/site', 'menu.php');
+					create_files('elements/site', 'top.php');
+
 				if (!file_exists('../../app/view/helper')) { mkdir('../../app/view/helper', 0777, true); }
 				if (!file_exists('../../app/view/pages')) { mkdir('../../app/view/pages', 0777, true); }
 					if (!file_exists('../../app/view/pages/home')) { mkdir('../../app/view/pages/home', 0777, true); }
@@ -95,6 +118,12 @@
 
 			if (!file_exists('../../app/webroot')) { mkdir('../../app/webroot', 0777, true); }
 				if (!file_exists('../../app/webroot/css')) { mkdir('../../app/webroot/css', 0777, true); }
+					create_files('webroot/css', 'main.css');
+					create_files('webroot/css', 'admin.css');
+					create_files('webroot/css', 'carousel.css');
+					create_files('webroot/css', 'mobile.css');
+					create_files('webroot/css', 'gallery.css');
+
 				if (!file_exists('../../app/webroot/files')) { mkdir('../../app/webroot/files', 0777, true); }
 				if (!file_exists('../../app/webroot/img')) { mkdir('../../app/webroot/img', 0777, true); }
 
