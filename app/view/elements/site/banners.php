@@ -9,8 +9,6 @@
 			<?php
 
 				$i = '1';
-
-				include($_SERVER['DOCUMENT_ROOT'].'/blackholeframe/app/config/database.php');
 				
 				$conn = db();
 					

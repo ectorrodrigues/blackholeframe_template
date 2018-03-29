@@ -9,8 +9,10 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700,900" rel="stylesheet">
-    <link rel="shortcut icon" href="/brazilboots/app/webroot/files/favicon.ico" type="image/x-icon">
-    <link rel="icon"  href="/brazilboots/app/webroot/files/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/<?php $sitename = explode('/', $_SERVER['PHP_SELF']); echo $sitename[1];
+?>/app/webroot/files/favicon.ico" type="image/x-icon">
+    <link rel="icon"  href="/<?php $sitename = explode('/', $_SERVER['PHP_SELF']); echo $sitename[1];
+?>/app/webroot/files/favicon.ico" type="image/x-icon">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

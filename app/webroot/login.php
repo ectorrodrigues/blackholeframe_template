@@ -24,8 +24,8 @@
         ?>
 
 			<form action="<?= ROOT.'admin'.DS?>" method="post" enctype="multipart/form-data">
-		    	<input type="text" name="user" placeholder="usuario" />
-		        <input type="password" name="password" placeholder="senha" />
+		    	<input type="text" name="user" placeholder="user" />
+		        <input type="text" name="password" placeholder="password" />
 		    	<input type="submit" name="submit" class="submit transition" value="enviar" style="width: 84%;" />
 		    </form>
 		</div>

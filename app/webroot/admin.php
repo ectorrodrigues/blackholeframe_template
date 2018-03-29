@@ -18,12 +18,12 @@
 			$content = '
 			<div class="menu-item">
 				<a href="'.ROOT.ADMIN.'{id}">
-					{function->remove_underlines->titulo}
+					{function->remove_underlines->title}
 				</a>
 			</div>
 			';
 
-			foreach_fetch(	
+			loop(	
 			/*table*/$cms,
 			/*content*/$content, 
 			/*where*/"",

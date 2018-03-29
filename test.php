@@ -6,15 +6,10 @@
 
 	//setcookie('login', '$1$H2Oc3po$Hf67niGYxzbBhQldDuou1.', time() + (14400 * 30), "/");
 
-//echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+	//echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-
-if(!defined('DS')){ define('DS', '/');}
-
-$sitename = explode(DS, $_SERVER['PHP_SELF']);
-if(!defined('SITE')){ define('SITE', $sitename[1]);}
-
-echo SITE;
+$password 	= crypt('#Black2018hole', '$1$H2Oc3po$');
+echo $password;
 
 ?>
 

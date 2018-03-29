@@ -39,7 +39,7 @@
 				$columns .= $field.', ';
 			}
 
-			if($field !== "img" AND $field !== "icone") {
+			if($field !== "img") {
 				$field = $_POST[$field];
 			}
 			else{
@@ -230,6 +230,6 @@
 
 	$conn=null;
 
-	header('Location:'. ROOT . ADMIN . $_GET['id']);
+	header('Location:'. SERVER_DIR . ADMIN . $_GET['id']);
 
 ?>

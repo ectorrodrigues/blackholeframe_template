@@ -42,7 +42,7 @@
 					</div>
 					<div class="col2 inline" align="right">
 						<a href="'.ROOT.ADMIN.'edit'.DS.$id_item.DS.$id.'"><div class="bt_edit inline transition"><i class="fa fa-pencil" aria-hidden="true"></i></div></a>
-						<a href="'.DS.'brazilboots'.DS.ADMIN.'controller'.DS.'delete'.DS.$id_item.DS.$id.'"><div class="bt_delete inline transition"><i class="fa fa-times" aria-hidden="true"></i></div></a>
+						<a href="'.DS.SITE_NAME.DS.ADMIN.'model'.DS.'delete'.DS.$id_item.DS.$id.'"><div class="bt_delete inline transition"><i class="fa fa-times" aria-hidden="true"></i></div></a>
 					</div>
 				</div>
 				';
@@ -83,7 +83,7 @@
 			</div>
 			<div class="col2 inline" align="right">
 				<a href="'.ROOT.ADMIN.'edit'.DS.$id_item.DS.$id.'"><div class="bt_edit inline transition"><i class="fa fa-pencil" aria-hidden="true"></i></div></a>
-				<a href="'.DS.'brazilboots'.DS.ADMIN.'controller'.DS.'delete'.DS.$id_item.DS.$id.'"><div class="bt_delete inline transition"><i class="fa fa-times" aria-hidden="true"></i></div></a>
+				<a href="'.DS.SITE_NAME.DS.ADMIN.'model'.DS.'delete'.DS.$id_item.DS.$id.'"><div class="bt_delete inline transition"><i class="fa fa-times" aria-hidden="true"></i></div></a>
 			</div>
 		</div>
 		';

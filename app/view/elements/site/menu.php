@@ -1,6 +1,6 @@
 <?php
 
-	$content = '<a href=".DS.'.WWW.'{link}" class="transition">{titulo}</a>';
+	$content = '<a href=".DS.'.WWW.'{link}" class="transition">{title}</a>';
 
 	loop(
 	/*table*/"menu",

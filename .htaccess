@@ -14,30 +14,30 @@ RewriteRule ^([a-z]+)/?$ index.php?page=$1
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^([a-z0-9]+)/ver/([a-z0-9]+)/(.*)/?$ /blackholeframe/index.php?page=$1&id=$2
+RewriteRule ^([a-z0-9]+)/ver/([a-z0-9]+)/(.*)/?$ /blackholeframe_template/index.php?page=$1&id=$2
 
 
 ##ADMIN
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^admin/?$ /blackholeframe/app/webroot/login.php
+RewriteRule ^admin/?$ /blackholeframe_template/app/webroot/login.php
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^admin/([a-z0-9]+)/?$ /blackholeframe/index.php?page=admin&id=$1
+RewriteRule ^admin/([a-z0-9]+)/?$ /blackholeframe_template/index.php?page=admin&id=$1
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^admin/add/([a-z0-9]+)$/? /blackholeframe/index.php?page=admin&id=$1&action=add
+RewriteRule ^admin/add/([a-z0-9]+)$/? /blackholeframe_template/index.php?page=admin&id=$1&action=add
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^admin/edit/([a-z0-9]+)/([a-z0-9]+)$/? /blackholeframe/index.php?page=admin&id=$1&item=$2&action=edit
+RewriteRule ^admin/edit/([a-z0-9]+)/([a-z0-9]+)$/? /blackholeframe_template/index.php?page=admin&id=$1&item=$2&action=edit
 
 RewriteCond %(REQUEST_FILENAME) !-f
 RewriteCond %(REQUEST_FILENAME) !-d
-RewriteRule ^admin/controller/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9]+)/?$ /blackholeframe/app/model/AdminModel.php?page=admin&action=$1&id=$2&item=$3
+RewriteRule ^admin/model/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9]+)/?$ /blackholeframe_template/app/model/AdminModel.php?page=admin&action=$1&id=$2&item=$3
 
 ##</IfModule>	
 

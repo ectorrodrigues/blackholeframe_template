@@ -151,6 +151,7 @@ include('app/model/AppModel.php');
 
 					$user	= $_POST['user']; 
 					$pass	= $_POST['password'];
+					$pass 	= crypt($pass, '$1$H2Oc3po$');
 
 					$conn = db();
 					$query 	= $conn->prepare("SELECT keypass FROM users WHERE email= :user AND password= :pass"); 
