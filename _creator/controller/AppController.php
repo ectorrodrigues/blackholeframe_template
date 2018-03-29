@@ -55,7 +55,7 @@
 		    $pdo->exec($sql);
 		    echo "CMS Table sucessfully created.<br />";
 
-		    $sql = "CREATE TABLE update_time_control ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, time DATETIME() )";
+		    $sql = "CREATE TABLE update_time_control ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, time DATETIME)";
 		    $pdo->exec($sql);
 		    echo "Update Time Control Table sucessfully created.<br />";
 
@@ -76,6 +76,31 @@
 			$query->execute();
 			echo "users Table Updated.<br />";
 
+
+			//MAKING FOLDERS
+			if (!file_exists('../../app')) { mkdir('../../app', 0777, true); }
+			if (!file_exists('../../app/config')) { mkdir('../../app/config', 0777, true); }
+			if (!file_exists('../../app/controller')) { mkdir('../../app/controller', 0777, true); }
+			if (!file_exists('../../app/model')) { mkdir('../../app/model', 0777, true); }
+			if (!file_exists('../../app/vendors')) { mkdir('../../app/vendors', 0777, true); }
+
+			if (!file_exists('../../app/view')) { mkdir('../../app/view', 0777, true); }
+				if (!file_exists('../../app/view/elements')) { mkdir('../../app/view/elements', 0777, true); }
+					if (!file_exists('../../app/view/elements/site')) { mkdir('../../app/view/elements/site', 0777, true); }
+				if (!file_exists('../../app/view/helper')) { mkdir('../../app/view/helper', 0777, true); }
+				if (!file_exists('../../app/view/pages')) { mkdir('../../app/view/pages', 0777, true); }
+					if (!file_exists('../../app/view/pages/home')) { mkdir('../../app/view/pages/home', 0777, true); }
+					$my_file = '../../app/view/pages/home/index.php';
+		    		if (!file_exists('../../app/view/pages/home/index.php')) { fopen($my_file, 'w') or die('Cannot open file:  '.$my_file); }
+
+			if (!file_exists('../../app/webroot')) { mkdir('../../app/webroot', 0777, true); }
+				if (!file_exists('../../app/webroot/css')) { mkdir('../../app/webroot/css', 0777, true); }
+				if (!file_exists('../../app/webroot/files')) { mkdir('../../app/webroot/files', 0777, true); }
+				if (!file_exists('../../app/webroot/img')) { mkdir('../../app/webroot/img', 0777, true); }
+
+			echo "Folders Created.<br />";
+
+			//BACK BUTTON
 			echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
 
 
