@@ -1,7 +1,7 @@
 <?php 
-	$url = explode("/",'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); $url = array_pop($url);
- 	if($url == ''){ echo '<style>.top{position: absolute; z-index: 2;}</style>'; } 
-	require( 'C:\wamp64\www\blackholeframe\app\view\elements\site\banners.php');     
+	//$url = explode("/",'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); $url = array_pop($url);
+ 	//if($url == ''){ echo '<style>.top{position: absolute; z-index: 2;}</style>'; } 
+	//require( 'C:\wamp64\www\blackholeframe\app\view\elements\site\banners.php');     
 ?>
 
 	<div class="container-fluid">
