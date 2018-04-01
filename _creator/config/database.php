@@ -2,7 +2,7 @@
 try { 
 
 	$servername	= 'localhost';
-	$dbname		= 'blackholeframe_template';
+	$dbname		= 'test5';
 	$username	= 'root';
 	$password	= '';
 	

@@ -3,6 +3,7 @@
 	$sitename = explode('/', $_SERVER['PHP_SELF']);
 	$sitename = $sitename[1];
 
+	if(isset($_GET['page'])){ 				$page 			= $_GET['page']; }
 	if(isset($_POST['table'])){ 			$table 			= $_POST['table']; }
 	if(isset($_POST['title'])){ 			$title 			= $_POST['title']; }
 	if(isset($_POST['db_num_columns'])){ 	$db_num_columns	= $_POST['db_num_columns']; }
@@ -43,7 +44,7 @@
 	}
 			
 
-	if(isset($_GET['initial'])){
+if($page == 'new'){
 
 		try {
 
@@ -87,6 +88,40 @@
 			$query->bindParam(':keypass', $password);
 			$query->execute();
 			echo "users Table Updated.<br />";
+
+
+			$sql = "CREATE TABLE config ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
+		    $pdo->exec($sql);
+		    echo "config Table sucessfully created.<br />";
+
+		    $query 	= $pdo->prepare("INSERT INTO config (id, title, content) 
+		    	VALUES ('', 'Database Name', '".$db_name."'), 
+		    	('', 'Site_Title', 'Title of your Site'), 
+		    	('', 'Auto_Update_AppModel', 'yes'),
+		    	('', 'Auto_Update_AdminModel', 'yes'),
+		    	('', 'Auto_Update_Helper_List', 'yes'),
+		    	('', 'Auto_Update_Helper_Form', 'yes')
+		    	"); 
+			$query->execute();
+			echo "config Table Updated.<br />";
+
+			$sql = "CREATE TABLE inputtypes ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
+		    $pdo->exec($sql);
+		    echo "config Table sucessfully created.<br />";
+
+		    $query 	= $pdo->prepare("INSERT INTO inputtypes (id, title, content) 
+		    	VALUES ('', 'array_fields_hidden', '\"id\"'), 
+		    	('', 'array_fields_text', '\"title\"'),
+		    	('', 'array_fields_number', '\"sku\", \"price\"'),
+		    	('', 'array_fields_select', '\"status\", \"id_category\", \"id_subcategory\", \"id_posts\"'),
+		    	('', 'array_fields_img', '\"img\", \"photo\", \"icon\"'),
+		    	('', 'array_fields_textarea', '\"text\", \"description\", \"addres\"'),
+		    	('', 'array_fields_date', '\"date\"'),
+		    	('', 'array_fields_time', '\"hour\", \"time\"' ),
+		    	('', 'array_galeries', '\"products\", \"blog\", \"news\"' ),
+		    	"); 
+			$query->execute();
+			echo "input_types Table Updated.<br />";
 
 
 			//MAKING FOLDERS AND POPULATE THEM WITH FILES
@@ -150,7 +185,16 @@
 
 	    die();
 
-	}
+}
+
+
+
+if($page == 'configurations'){
+}
+
+
+
+if($page == 'pages'){
 
 	// CREATE DATABASE ---------------------------------------------------------------------------------------
 
@@ -341,6 +385,7 @@ function fechar() {
 
 	echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
 
+}
 
 	$conn = null;
 

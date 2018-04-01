@@ -1,0 +1,111 @@
+body{
+	font-family: Montserrat;
+    background-color: #000;
+}
+
+.border{
+	border:solid;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #666;
+}
+
+.rounded-box{
+	width: 180px;
+	height: 180px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	 border-radius: 100%;
+	color: #fff;
+	font-size: 22px;
+	font-weight: 100;
+}
+
+.rounded-box:hover{
+  border-color: #50FFFC;
+}
+
+a{
+  color: #fff !important;
+}
+
+a:hover{
+	text-decoration: none !important;
+}
+
+.infos {
+  color: #666;
+  margin-top: 20px;
+}
+
+.transition{
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+label{
+  color: #fff;
+}
+
+.text-green{
+  color: #4CFE30;
+}
+
+.w-60{
+  width: 60%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.btn{
+  background-color: #000 !important;
+  color: #50FFFC;
+  border:solid;
+  border-color: #50FFFC;
+  border-width:1px;
+  
+}
+
+.btn:hover{
+  background-color: #50FFFC !important;
+  color: #000;
+  border:none;
+}
+
+.top{
+  border-bottom: solid;
+  border-bottom-color: #666;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: #fff;
+  font-weight: 300;
+  padding: 15px 0;
+}
+
+.padding-top-bottom{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.inline{
+  display: inline;
+}
+
+h3{
+  color: #50FFFC;
+  font-weight: 600;
+}
+
+.logo{
+  padding: 80px 0;
+  color: #000;
+  text-shadow: -1px 0 #999, 0 1px #999, 1px 0 #999, 0 -1px #999;
+  font-size: 30px;
+  font-weight: 700;
+}
