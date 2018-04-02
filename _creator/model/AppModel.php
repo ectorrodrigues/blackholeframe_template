@@ -40,7 +40,7 @@
 
 		file_put_contents('../../app/'.$dir.'/'.$filename, $appmodel);
 
-		echo $filename;
+		echo $filename.' sucessfuly created. <br>';
 	}
 			
 
@@ -105,20 +105,20 @@ if($page == 'new'){
 			$query->execute();
 			echo "config Table Updated.<br />";
 
-			$sql = "CREATE TABLE inputtypes ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
+			$sql = "CREATE TABLE input_types ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
 		    $pdo->exec($sql);
-		    echo "config Table sucessfully created.<br />";
+		    echo "input_types Table sucessfully created.<br />";
 
-		    $query 	= $pdo->prepare("INSERT INTO inputtypes (id, title, content) 
-		    	VALUES ('', 'array_fields_hidden', '\"id\"'), 
-		    	('', 'array_fields_text', '\"title\"'),
-		    	('', 'array_fields_number', '\"sku\", \"price\"'),
-		    	('', 'array_fields_select', '\"status\", \"id_category\", \"id_subcategory\", \"id_posts\"'),
-		    	('', 'array_fields_img', '\"img\", \"photo\", \"icon\"'),
-		    	('', 'array_fields_textarea', '\"text\", \"description\", \"addres\"'),
-		    	('', 'array_fields_date', '\"date\"'),
-		    	('', 'array_fields_time', '\"hour\", \"time\"' ),
-		    	('', 'array_galeries', '\"products\", \"blog\", \"news\"' ),
+		    $query 	= $pdo->prepare("INSERT INTO input_types (id, title, content) 
+		    	VALUES ('', 'array_fields_hidden', 'id'), 
+		    	('', 'array_fields_text', 'title'),
+		    	('', 'array_fields_number', 'sku, price'),
+		    	('', 'array_fields_select', 'status, id_category, id_subcategory, id_posts'),
+		    	('', 'array_fields_img', 'img, photo, icon'),
+		    	('', 'array_fields_textarea', 'text, description, addres'),
+		    	('', 'array_fields_date', 'date'),
+		    	('', 'array_fields_time', 'hour, time' ),
+		    	('', 'array_galeries', 'products, blog, news' )
 		    	"); 
 			$query->execute();
 			echo "input_types Table Updated.<br />";
@@ -139,11 +139,11 @@ if($page == 'new'){
 			if (!file_exists('../../app/view')) { mkdir('../../app/view', 0777, true); }
 				if (!file_exists('../../app/view/elements')) { mkdir('../../app/view/elements', 0777, true); }
 					if (!file_exists('../../app/view/elements/site')) { mkdir('../../app/view/elements/site', 0777, true); }
-					create_files('elements/site', 'banners.php');
-					create_files('elements/site', 'footer.php');
-					create_files('elements/site', 'head.php');
-					create_files('elements/site', 'menu.php');
-					create_files('elements/site', 'top.php');
+					create_files('view/elements/site', 'banners.php');
+					create_files('view/elements/site', 'footer.php');
+					create_files('view/elements/site', 'head.php');
+					create_files('view/elements/site', 'menu.php');
+					create_files('view/elements/site', 'top.php');
 
 				if (!file_exists('../../app/view/helper')) { mkdir('../../app/view/helper', 0777, true); }
 				if (!file_exists('../../app/view/pages')) { mkdir('../../app/view/pages', 0777, true); }
