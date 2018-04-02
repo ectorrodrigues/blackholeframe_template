@@ -104,6 +104,13 @@
 
 			</form>
 
+			<div class="form-group col-lg-12 text-right">
+				<a href="../_creator" class="btn-back" >
+					<i class="fas fa-undo-alt"></i> voltar
+				</a>
+			</div>
+
+
 		</div>
 
 

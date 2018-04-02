@@ -19,6 +19,8 @@
 
 	define('ROOT', "http://".$_SERVER['HTTP_HOST']);
 
+	$results_echo = '';
+
 	function addtext($title, $page){
 		$file    = '../../app/view/pages/'.$title.'/'.$page;
 	    $text = 
@@ -32,6 +34,9 @@
 	}
 
 	function create_files($dir, $filename){
+
+		global $results_echo;
+
 		$appmodel = file_get_contents('https://raw.githubusercontent.com/ectorrodrigues/blackholeframe/master/app/'.$dir.'/'.$filename);
 
 		if(strpos($appmodel, '<pre>') == true){
@@ -40,41 +45,41 @@
 
 		file_put_contents('../../app/'.$dir.'/'.$filename, $appmodel);
 
-		echo $filename.' sucessfuly created. <br>';
+		$results_echo .= '<strong>'.$filename.'</strong> sucessfuly created. <br>';
 	}
 			
 
 if($page == 'new'){
 
-		try {
+	try {
 
-		    try{
-			    $pdo = new PDO("mysql:host=localhost;", "root", "");
-			    // Set the PDO error mode to exception
-			    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch(PDOException $e){
-			    die("ERROR: Could not connect. " . $e->getMessage());
-			}
+		try{
+			$pdo = new PDO("mysql:host=localhost;", "root", "");
+			// Set the PDO error mode to exception
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch(PDOException $e){
+			die("ERROR: Could not connect. " . $e->getMessage());
+		}
 			 
-			// Attempt create database query execution
-			try{
-			    $sql = "CREATE DATABASE ".$_POST['db_name']." CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
-			    $pdo->exec($sql);
-			    $sql = "USE ".$_POST['db_name'];
-			    $pdo->exec($sql);
-			    echo "DATABASE sucessfully created.<br />";
+		// Attempt create database query execution
+		try{
+			$sql = "CREATE DATABASE ".$_POST['db_name']." CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
+			$pdo->exec($sql);
+			$sql = "USE ".$_POST['db_name'];
+			$pdo->exec($sql);
+			$results_echo .= "<strong>DATABASE</strong> sucessfully created.<br />";
 
 		    $sql = "CREATE TABLE cms ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50) )";
 		    $pdo->exec($sql);
-		    echo "CMS Table sucessfully created.<br />";
+		    $results_echo .= "<strong>CMS</strong> Table sucessfully created.<br />";
 
 		    $sql = "CREATE TABLE update_time_control ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, time DATETIME)";
 		    $pdo->exec($sql);
-		    echo "Update Time Control Table sucessfully created.<br />";
+		    $results_echo .= "<strong>Update Time Control</strong> Table sucessfully created.<br />";
 
 		    $sql = "CREATE TABLE users ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), email VARCHAR(80), password VARCHAR(150), keypass VARCHAR(150) )";
 		    $pdo->exec($sql);
-		    echo "users Table sucessfully created.<br />";
+		    $results_echo .= "<strong>Users</strong> Table sucessfully created.<br />";
 
 		    $user 		= $_POST['user'];
 		    $email 		= $_POST['email'];
@@ -87,12 +92,12 @@ if($page == 'new'){
 			$query->bindParam(':password', $password);
 			$query->bindParam(':keypass', $password);
 			$query->execute();
-			echo "users Table Updated.<br />";
+			$results_echo .= "<strong>Users</strong> Table Updated.<br />";
 
 
 			$sql = "CREATE TABLE config ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
 		    $pdo->exec($sql);
-		    echo "config Table sucessfully created.<br />";
+		    $results_echo .= "<strong>Config</strong> Table sucessfully created.<br />";
 
 		    $query 	= $pdo->prepare("INSERT INTO config (id, title, content) 
 		    	VALUES ('', 'Database Name', '".$db_name."'), 
@@ -103,11 +108,11 @@ if($page == 'new'){
 		    	('', 'Auto_Update_Helper_Form', 'yes')
 		    	"); 
 			$query->execute();
-			echo "config Table Updated.<br />";
+			$results_echo .= "<strong>Config</strong> Table Updated.<br />";
 
 			$sql = "CREATE TABLE input_types ( id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, title VARCHAR(50), content VARCHAR(500) )";
 		    $pdo->exec($sql);
-		    echo "input_types Table sucessfully created.<br />";
+		    $results_echo .= "<strong>Input_types</strong> Table sucessfully created.<br />";
 
 		    $query 	= $pdo->prepare("INSERT INTO input_types (id, title, content) 
 		    	VALUES ('', 'array_fields_hidden', 'id'), 
@@ -118,10 +123,10 @@ if($page == 'new'){
 		    	('', 'array_fields_textarea', 'text, description, addres'),
 		    	('', 'array_fields_date', 'date'),
 		    	('', 'array_fields_time', 'hour, time' ),
-		    	('', 'array_galeries', 'products, blog, news' )
+		    	('', 'array_galleries', 'products, blog, news' )
 		    	"); 
 			$query->execute();
-			echo "input_types Table Updated.<br />";
+			$results_echo .= "<strong>Input_types</strong> Table Updated.<br />";
 
 
 			//MAKING FOLDERS AND POPULATE THEM WITH FILES
@@ -162,11 +167,7 @@ if($page == 'new'){
 				if (!file_exists('../../app/webroot/files')) { mkdir('../../app/webroot/files', 0777, true); }
 				if (!file_exists('../../app/webroot/img')) { mkdir('../../app/webroot/img', 0777, true); }
 
-			echo "Folders Created.<br />";
-
-			//BACK BUTTON
-			echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
-
+			$results_echo .= "<strong>All Directories</strong> Created.<br />";
 
 			} catch(PDOException $e){
 			    die("ERROR: Could not able to execute $sql. " . $e->getMessage());
@@ -183,13 +184,97 @@ if($page == 'new'){
 		    echo $sql . "<br>" . $e->getMessage();
 	    }
 
-	    die();
-
 }
 
 
 
 if($page == 'configurations'){
+
+	$site_title 				= $_POST['site_title'];
+	$Auto_Update_AppModel 		= $_POST['Auto_Update_AppModel'];
+	$Auto_Update_AdminModel 	= $_POST['Auto_Update_AdminModel'];
+	$Auto_Update_Helper_List 	= $_POST['Auto_Update_Helper_List'];
+	$Auto_Update_Helper_Form 	= $_POST['Auto_Update_Helper_Form'];
+	$array_fields_hidden 		= $_POST['array_fields_hidden'];
+	$array_fields_text 			= $_POST['array_fields_text'];
+	$array_fields_number 		= $_POST['array_fields_number'];
+	$array_fields_select 		= $_POST['array_fields_select'];
+	$array_fields_img 			= $_POST['array_fields_img'];
+	$array_fields_textarea 		= $_POST['array_fields_textarea'];
+	$array_fields_date 			= $_POST['array_fields_date'];
+	$array_fields_time 			= $_POST['array_fields_time'];
+	$array_galleries 			= $_POST['array_galleries'];
+
+	$query 	= $pdo->prepare("UPDATE config SET content = :item WHERE title = 'Site_Title'"); 
+	$query->bindParam(':item', $site_title);
+	$query->execute();
+	$results_echo .= "<strong>Site_Title</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE config SET content = :item WHERE title = 'Auto_Update_AppModel'"); 
+	$query->bindParam(':item', $Auto_Update_AppModel);
+	$query->execute();
+	$results_echo .= "<strong>Auto_Update_AppModel</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE config SET content = :item WHERE title = 'Auto_Update_AdminModel'"); 
+	$query->bindParam(':item', $Auto_Update_AdminModel);
+	$query->execute();
+	$results_echo .= "<strong>Auto_Update_AdminModel</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE config SET content = :item WHERE title = 'Auto_Update_Helper_List'"); 
+	$query->bindParam(':item', $Auto_Update_Helper_List);
+	$query->execute();
+	$results_echo .= "<strong>Auto_Update_Helper_List</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE config SET content = :item WHERE title = 'Auto_Update_Helper_Form'"); 
+	$query->bindParam(':item', $Auto_Update_Helper_Form);
+	$query->execute();
+	$results_echo .= "<strong>Auto_Update_Helper_Form</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_hidden'"); 
+	$query->bindParam(':item', $array_fields_hidden);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_hidden</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_text'"); 
+	$query->bindParam(':item', $array_fields_text);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_text</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_number'"); 
+	$query->bindParam(':item', $array_fields_number);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_number</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_select'"); 
+	$query->bindParam(':item', $array_fields_select);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_select</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_img'"); 
+	$query->bindParam(':item', $array_fields_img);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_img</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_textarea'"); 
+	$query->bindParam(':item', $array_fields_textarea);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_textarea</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_date'"); 
+	$query->bindParam(':item', $array_fields_date);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_date</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_fields_time'"); 
+	$query->bindParam(':item', $array_fields_time);
+	$query->execute();
+	$results_echo .= "<strong>array_fields_time</strong> Column Updated.<br />";
+
+	$query 	= $pdo->prepare("UPDATE input_types SET content = :item WHERE title = 'array_galleries'"); 
+	$query->bindParam(':item', $array_galleries);
+	$query->execute();
+	$results_echo .= "<strong>array_galleries</strong> Column Updated.<br />";
+
 }
 
 
@@ -226,12 +311,12 @@ if($page == 'pages'){
 			$sql .= ' )';
 		    $conn->exec($sql);
 
-		    echo "Database sucessfully created.<br />";
+		    $results_echo .= "<strong>Database</strong> sucessfully created.<br />";
 
 		}
 
 		catch(PDOException $e) {
-		    echo $sql . "<br>" . $e->getMessage();
+		    $results_echo .= $sql . "<br>" . $e->getMessage();
 	    }
 	}
 
@@ -249,7 +334,7 @@ if($page == 'pages'){
 		$query->bindParam(':title', $title);
 		$query->bindParam(':last_id', $last_id);
 		$query->execute();
-		echo "CMS Updated.<br />";
+		$results_echo .= "<strong>CMS</strong> Updated.<br />";
 	}
 
 
@@ -262,9 +347,9 @@ if($page == 'pages'){
 		    $my_file = '../../app/view/pages/'.$title.'/index.php';
 		    fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
 		    addtext($title, 'index.php');
-		    echo "Index.php Created.<br />";
+		    echo "<strong>Index.php</strong> Created.<br />";
 		} else {
-			echo "Error: Index.php NOT Created.<br />";
+			$results_echo .= "<strong>Index.php</strong> NOT Created.<br />";
 		}
 	}
 
@@ -275,9 +360,9 @@ if($page == 'pages'){
     	$my_file = '../../app/view/pages/'.$title.'/ver.php';
 	    fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
 	    addtext($title, 'ver.php');
-		echo "Ver.php Created.<br />";
+		$results_echo .= "<strong>Ver.php</strong> Created.<br />";
 	} else {
-		echo "Error: Ver.php NOT Created.<br />";
+		$results_echo .= "<strong>Ver.php</strong> NOT Created.<br />";
 	}
 
 	// CREATE GALLERY --------------------------------------------------------------------------------------------
@@ -377,16 +462,71 @@ function fechar() {
 	    $conn->exec($sql);
 
 
-		echo "Gallery Created.<br />";
+		$results_echo .= "<strong>Gallery</strong> Created.<br />";
 	} else {
-		echo "Error: Gallery NOT Created.<br />";
+		$results_echo .= "<strong>Gallery</strong> NOT Created.<br />";
 	}
-
-
-	echo '<p><a href="/'.$sitename.'/_creator" style="background-color:#000; color:#fff; padding:15px 10px; border-radius:5px; text-decoration:none; margin:15px 0;" >Voltar</a></p>';
 
 }
 
 	$conn = null;
 
+
+	echo '
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,600,700,700i,900" rel="stylesheet">
+
+	<style>
+	body{
+		background-color: #000;
+		color: #fff;
+		text-align: left;
+		font-size: 12px;
+		line-height: 17px;
+		font-family: "Montserrat", sans-serif;
+		font-weight: 300;
+	}
+
+	.row{
+		width:100%;
+		padding:40px 0 5px 0;
+	}
+
+	.col{
+		width:300px;
+		text-align: left;
+	}
+
+	.btn{
+		background-color: #000 !important;
+	  	color: #50FFFC;
+	  	border:solid;
+	  	border-color: #50FFFC;
+	  	border-width:1px;
+	  	padding:10px;
+	  	border-radius:5px;
+	  	text-decoration:none;
+	}
+	.btn:hover{
+	  	background-color: #50FFFC !important;
+	  	color: #000;
+	  	border:none;
+	}
+	</style>
+
+	<div class="container-fluid" align="center">
+		<div class="row" align="center">
+			<div class="col">
+				'.$results_echo.'
+			</div>
+		</div>
+		<div class="row" align="center">
+			<div class="col">
+				<a href="/'.$sitename.'/_creator?page='.$page.'" class="btn" >
+					voltar
+				</a>
+			</div>
+		</div>
+	</div>';
+
 ?>
+

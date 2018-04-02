@@ -37,7 +37,7 @@
 
 							echo '
 							<label>'.$update_title.'</label>
-				    		<select name="'.$update_title.'">
+				    		<select name="'.$update_title.'" class="form-control">
 							';		
 
 							if($value == 'yes'){ 
@@ -66,18 +66,24 @@
 
 							echo '
 							<label>'.$title.'</label>
-				    		<input type="text" name="'.$title.'" value="'.$content.'"><br />
+				    		<input type="text" name="'.$title.'"  class="form-control" value="'.$content.'"><br />
 							';	
 
 						}
 					?>
 				</div>
 
-				<div class="form-group col-lg-12">
-				    <button type="submit" class="btn btn-primary">Create</button>
+				<div class="form-group col-md-12 padding-top-bottom text-right">
+					<button type="submit" class="btn btn-primary transition">Create</button>
 				</div>
 
 			</form>
+
+			<div class="form-group col-lg-12 text-right">
+				<a href="../_creator" class="btn-back" >
+					<i class="fas fa-undo-alt"></i> voltar
+				</a>
+			</div>
 
 		</div>	
 </div>
